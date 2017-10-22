@@ -11,7 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
-import Button from './src/components/Button';
+import RecordButton from './src/components/RecordButton';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -30,9 +30,8 @@ export default class App extends Component<{}> {
         <Text style={styles.instructions}>
           {instructions}
         </Text>
-        <Button> 
-          Click me!
-        </Button>
+        
+        <RecordButton />
       </View>
     );
   }
