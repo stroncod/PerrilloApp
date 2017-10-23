@@ -2,19 +2,17 @@ import React from 'react';
 import {
   StyleSheet,
   Button,
-  Text
+  Text,
+  ScrollView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card } from 'react-native-elements'
 
 const Home = () => {
-
-
 	return (
-		[	
+		<ScrollView>
 			<Card 
 				title='Modo Ruta'
-				key='0'
 			>
 				<Text style={{ marginBottom: 10 }}>				
 					Ingresa tu dirección para recibir tu ruta
@@ -27,10 +25,9 @@ const Home = () => {
 					title='Ingresar al modo ruta' 				
 					onPress={() => Actions.recordbutton()}			
 				/>
-			</Card>,
+			</Card>
 			<Card 
 				title='Modo Exploración'
-				key='1'
 			>
 				<Text style={{ marginBottom: 10 }}>				
 					Ingresa para poder explorar el alrededor
@@ -42,10 +39,9 @@ const Home = () => {
 					buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
 					title='Ingresar al modo exploración'			
 				/>
-			</Card>,
+			</Card>
 			<Card 
 				title='Configuración'
-				key='2'
 			>
 				<Text style={{ marginBottom: 10 }}>				
 					Modifica configuraciones de la aplicación
@@ -59,7 +55,7 @@ const Home = () => {
 				/>
 			</Card>
 			
-		]
+		</ScrollView>
 	);
 };
 

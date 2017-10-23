@@ -3,32 +3,24 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
-  AppRegistry,
-  TouchableHighlight,
+  Button,
+  Alert,
 } from 'react-native';
 
 import Voice from 'react-native-voice';
 
-export default class VoiceTest extends Component {
+export default class RecordButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recognized: '',
-      pitch: '',
-      error: '',
       end: '',
       started: '',
       results: [],
-      partialResults: [],
     };
-    Voice.onSpeechStart = this.onSpeechStart.bind(this);
-    Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
+    Voice.onSpeechStart = this.onSpeechStart.bind(this);  
     Voice.onSpeechEnd = this.onSpeechEnd.bind(this);
     Voice.onSpeechError = this.onSpeechError.bind(this);
     Voice.onSpeechResults = this.onSpeechResults.bind(this);
-    Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
-    Voice.onSpeechVolumeChanged = this.onSpeechVolumeChanged.bind(this);
   }
 
   componentWillUnmount() {
@@ -37,26 +29,24 @@ export default class VoiceTest extends Component {
 
   onSpeechStart() {
     this.setState({
-      started: '√',
-    });
-  }
-
-  onSpeechRecognized() {
-    this.setState({
-      recognized: '√',
+      started: 'Empezo el reconocimiento',
     });
   }
 
   onSpeechEnd() {
     this.setState({
-      end: '√',
+      end: 'Termino el reconocimiento',
     });
   }
 
   onSpeechError(e) {
-    this.setState({
-      error: JSON.stringify(e.error),
-    });
+    Alert.alert(
+    'Problemas con el reconocimiento',
+    JSON.stringify(e.error),
+  [
+    { text: 'OK', onPress: () => console.log('OK Pressed') },
+  ],
+    );
   }
 
   onSpeechResults(e) {
@@ -65,26 +55,10 @@ export default class VoiceTest extends Component {
     });
   }
 
-  onSpeechPartialResults(e) {
-    this.setState({
-      partialResults: e.value,
-    });
-  }
-
-  onSpeechVolumeChanged(e) {
-    this.setState({
-      pitch: e.value,
-    });
-  }
-
   async _startRecognizing() {
     this.setState({
-      recognized: '',
-      pitch: '',
-      error: '',
       started: '',
       results: [],
-      partialResults: [],
       end: ''
     });
     try {
@@ -129,32 +103,21 @@ export default class VoiceTest extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native Voice!
-        </Text>
-        <Text style={styles.instructions}>
-          Press the button and start speaking.
-        </Text>
-        <Text
-          style={styles.stat}
-        >
-          {`Started: ${this.state.started}`}
+      <View style={styles.container} accessible={true}>
+        <Text h2 style={styles.instructions}>
+          Presiona el boton grabar para ingresar la dirección a la que quieres ir. 
+          Cuando hayas terminado presiona el boton finalizar para ingresar correctamente la dirección.
+          Recuerda hablar despacio.
         </Text>
         <Text
           style={styles.stat}
         >
-          {`Recognized: ${this.state.recognized}`}
+          {`${this.state.started}`}
         </Text>
         <Text
           style={styles.stat}
         >
-          {`Pitch: ${this.state.pitch}`}
-        </Text>
-        <Text
-          style={styles.stat}
-        >
-          {`Error: ${this.state.error}`}
+          {`${this.state.end}`}
         </Text>
         <Text
           style={styles.stat}
@@ -170,46 +133,17 @@ export default class VoiceTest extends Component {
               {result}
             </Text>
           );
-        })}
-        <Text
-          style={styles.stat}>
-          Partial Results
-        </Text>
-        {this.state.partialResults.map((result, index) => {
-          return (
-            <Text
-              key={`partial-result-${index}`}
-              style={styles.stat}>
-              {result}
-            </Text>
-          );
-        })}
-        <Text
-          style={styles.stat}>
-          {`End: ${this.state.end}`}
-        </Text>
-        <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
-          <Text> Grabar </Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this._stopRecognizing.bind(this)}>
-          <Text
-            style={styles.action}
-          >
-            Stop Recognizing
-          </Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this._cancelRecognizing.bind(this)}>
-          <Text
-            style={styles.action}>
-            Cancel
-          </Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this._destroyRecognizer.bind(this)}>
-          <Text
-            style={styles.action}>
-            Destroy
-          </Text>
-        </TouchableHighlight>
+        })} 
+        <Button 
+          onPress={this._startRecognizing.bind(this)}
+          title="Grabar"
+          //style={styles.button}
+        />
+        <Button 
+            onPress={this._stopRecognizing.bind(this)}
+            title="Finalizar"
+            //style={styles.button}
+        />
       </View>
     );
   }
@@ -217,29 +151,17 @@ export default class VoiceTest extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    width: 50,
-    height: 50,
+    backgroundColor: 'green',
+    width: '40%',
+    height: 40
   },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  action: {
-    textAlign: 'center',
-    color: '#0000FF',
-    marginVertical: 5,
-    fontWeight: 'bold',
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
     marginBottom: 5,
   },
   stat: {
@@ -248,5 +170,3 @@ const styles = StyleSheet.create({
     marginBottom: 1,
   },
 });
-
-AppRegistry.registerComponent('VoiceTest', () => VoiceTest);
