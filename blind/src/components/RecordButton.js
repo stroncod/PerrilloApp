@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   AppRegistry,
   TouchableHighlight,
 } from 'react-native';
@@ -87,7 +88,7 @@ export default class VoiceTest extends Component {
       end: ''
     });
     try {
-      await Voice.start('en');
+      await Voice.start('en-US');
     } catch (e) {
       console.error(e);
     }
@@ -136,33 +137,39 @@ export default class VoiceTest extends Component {
           Press the button and start speaking.
         </Text>
         <Text
-          style={styles.stat}>
+          style={styles.stat}
+        >
           {`Started: ${this.state.started}`}
         </Text>
         <Text
-          style={styles.stat}>
+          style={styles.stat}
+        >
           {`Recognized: ${this.state.recognized}`}
         </Text>
         <Text
-          style={styles.stat}>
+          style={styles.stat}
+        >
           {`Pitch: ${this.state.pitch}`}
         </Text>
         <Text
-          style={styles.stat}>
+          style={styles.stat}
+        >
           {`Error: ${this.state.error}`}
         </Text>
         <Text
-          style={styles.stat}>
+          style={styles.stat}
+        >
           Results
         </Text>
         {this.state.results.map((result, index) => {
           return (
             <Text
               key={`result-${index}`}
-              style={styles.stat}>
+              style={styles.stat}
+            >
               {result}
             </Text>
-          )
+          );
         })}
         <Text
           style={styles.stat}>
@@ -175,18 +182,19 @@ export default class VoiceTest extends Component {
               style={styles.stat}>
               {result}
             </Text>
-          )
+          );
         })}
         <Text
           style={styles.stat}>
           {`End: ${this.state.end}`}
         </Text>
         <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
-          <Text style={styles.action}> Grabar </Text>
+          <Text> Grabar </Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={this._stopRecognizing.bind(this)}>
           <Text
-            style={styles.action}>
+            style={styles.action}
+          >
             Stop Recognizing
           </Text>
         </TouchableHighlight>
