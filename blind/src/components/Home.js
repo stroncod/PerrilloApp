@@ -37,7 +37,8 @@ const Home = () => {
 					backgroundColor='#4286f4'
 					fontFamily='Lato'
 					buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-					title='Ingresar al modo exploración'			
+					title='Ingresar al modo exploración'
+					onPress={() => Actions.exploreMode()}			
 				/>
 			</Card>
 			<Card 
