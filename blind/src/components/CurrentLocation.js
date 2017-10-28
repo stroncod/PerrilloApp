@@ -10,7 +10,7 @@ class CurrentLocation extends Component {
       latitude: null,
       longitude: null,
       error: null,
-      results: [],
+      currentPlaces: [],
     };
   }
 
@@ -28,7 +28,7 @@ class CurrentLocation extends Component {
     );
 
     RNGooglePlaces.getCurrentPlace()
-    .then((results) => console.log(results))
+    .then(response => this.setState({ currentPlaces: response }))
     .catch((error) => console.log(error.message));
   }
 
@@ -41,6 +41,9 @@ class CurrentLocation extends Component {
       <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Latitude: {this.state.latitude}</Text>
         <Text>Longitude: {this.state.longitude}</Text>
+        {this.state.currentPlaces.slice(0, 1).map(place =>
+          <Text>Usted está en: {place.name} </Text>
+          )}
         {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
       </View>
     );
