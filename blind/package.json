@@ -13,6 +13,7 @@
     "react-native-google-places": "^2.4.2",
     "react-native-maps": "^0.17.1",
     "react-native-router-flux": "^4.0.0-beta.22",
+    "react-native-tts": "^1.4.1",
     "react-native-vector-icons": "^4.4.2",
     "react-native-voice": "^0.2.5"
   },

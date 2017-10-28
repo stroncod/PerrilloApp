@@ -1,8 +1,8 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import RecordButton from './components/RecordButton'; 
-import Home from './components/Home';
-import CurrentLocation from './components/CurrentLocation';
+import Home from './pages/Home';
+import ExplorerPage from './pages/ExplorerPage';
 
 const RouterComponent = () => {
 	return (
@@ -10,7 +10,7 @@ const RouterComponent = () => {
 			<Scene key="root">
 				<Scene key="home" component={Home} title="HomePage" initial />
 				<Scene key="recordbutton" component={RecordButton} title="RecordPage" />
-				<Scene key="exploreMode" component={CurrentLocation} title="ExplorePage" />
+				<Scene key="exploreMode" component={ExplorerPage} title="ExplorerPage" />
 				
 			</Scene>
 		</Router>
