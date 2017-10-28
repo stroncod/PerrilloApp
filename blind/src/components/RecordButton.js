@@ -62,7 +62,7 @@ export default class RecordButton extends Component {
       end: ''
     });
     try {
-      await Voice.start('en-US');
+      await Voice.start('es-US');
     } catch (e) {
       console.error(e);
     }
