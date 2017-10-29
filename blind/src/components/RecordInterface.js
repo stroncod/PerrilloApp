@@ -8,36 +8,24 @@ import {
 } from 'react-native';
 
 import Voice from 'react-native-voice';
+import Tts from 'react-native-tts';
 
-export default class RecordButton extends Component {
+export default class RecordInterface extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      end: '',
+      itStopRecording: false,
       started: '',
       results: [],
-    };
-    Voice.onSpeechStart = this.onSpeechStart.bind(this);  
+    }; 
     Voice.onSpeechEnd = this.onSpeechEnd.bind(this);
     Voice.onSpeechError = this.onSpeechError.bind(this);
     Voice.onSpeechResults = this.onSpeechResults.bind(this);
   }
 
-  componentWillUnmount() {
-    Voice.destroy().then(Voice.removeAllListeners);
-  }
-
-  onSpeechStart() {
-    this.setState({
-      started: 'Empezo el reconocimiento',
-    });
-  }
-
-  onSpeechEnd() {
-    this.setState({
-      end: 'Termino el reconocimiento',
-    });
-  }
+  //componentWillUnmount() {
+    //Voice.destroy().then(Voice.removeAllListeners);
+  //}
 
   onSpeechError(e) {
     Alert.alert(
@@ -54,12 +42,17 @@ export default class RecordButton extends Component {
       results: e.value,
     });
   }
+  onSpeechEnd() {
+    this.setState({
+      itStopRecording: true
+    });
+  }
 
   async _startRecognizing() {
     this.setState({
       started: '',
       results: [],
-      end: ''
+      itStopRecording: false
     });
     try {
       await Voice.start('es-US');
@@ -91,13 +84,9 @@ export default class RecordButton extends Component {
       console.error(e);
     }
     this.setState({
-      recognized: '',
-      pitch: '',
-      error: '',
+      itStopRecording: false,
       started: '',
       results: [],
-      partialResults: [],
-      end: ''
     });
   }
 
@@ -107,24 +96,14 @@ export default class RecordButton extends Component {
         <Text h2 style={styles.instructions}>
           Presiona el boton grabar para ingresar la dirección a la que quieres ir. 
           Cuando hayas terminado presiona el boton finalizar para ingresar correctamente la dirección.
-          Recuerda hablar despacio.
+          Recuerda hablar despacio. Luego de escuchar la dirección ingresada, si es correcta apreta el 
+          boton Confirmar, si no es correcta apreta el botón Cancelar para repetir el proceso.
         </Text>
-        <Text
-          style={styles.stat}
-        >
-          {`${this.state.started}`}
-        </Text>
-        <Text
-          style={styles.stat}
-        >
-          {`${this.state.end}`}
-        </Text>
-        <Text
-          style={styles.stat}
-        >
-          Results
-        </Text>
+        
+      
         {this.state.results.map((result, index) => {
+          const accesibilityDialog = `La dirección ingresada es ${result}`;
+          Tts.speak(accesibilityDialog);
           return (
             <Text
               key={`result-${index}`}
@@ -134,26 +113,39 @@ export default class RecordButton extends Component {
             </Text>
           );
         })} 
-        <Button 
-          onPress={this._startRecognizing.bind(this)}
-          title="Grabar"
-          //style={styles.button}
-        />
-        <Button 
-            onPress={this._stopRecognizing.bind(this)}
-            title="Finalizar"
+        
+          <Button 
+            onPress={this._startRecognizing.bind(this)}
+            title="Grabar"
             //style={styles.button}
-        />
+          />
+          <Button 
+              onPress={this._stopRecognizing.bind(this)}
+              title="Finalizar"
+              //style={styles.button}
+          />
+        
+        {this.state.itStopRecording ? 
+          <Button
+            onPress={this._destroyRecognizer.bind(this)}
+            title="Cancelar"
+          /> 
+        : null }
+        {this.state.itStopRecording ? 
+          <Button
+            title="Confirmar"
+          /> 
+        : null }
+
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: 'green',
-    width: '40%',
-    height: 40
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
   },
   container: {
     flex: 1,
