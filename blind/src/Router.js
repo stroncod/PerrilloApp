@@ -1,6 +1,6 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
-import RecordButton from './components/RecordButton'; 
+import RoutePage from './pages/RoutePage'; 
 import Home from './pages/Home';
 import ExplorerPage from './pages/ExplorerPage';
 
@@ -9,7 +9,7 @@ const RouterComponent = () => {
 		<Router>
 			<Scene key="root">
 				<Scene key="home" component={Home} title="HomePage" initial />
-				<Scene key="recordbutton" component={RecordButton} title="RecordPage" />
+				<Scene key="recordbutton" component={RoutePage} title="RoutePage" />
 				<Scene key="exploreMode" component={ExplorerPage} title="ExplorerPage" />
 				
 			</Scene>

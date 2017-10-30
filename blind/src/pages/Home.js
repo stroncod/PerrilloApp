@@ -6,7 +6,7 @@ import {
   ScrollView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { Card } from 'react-native-elements'
+import { Card } from 'react-native-elements';
 
 const Home = () => {
 	return (
