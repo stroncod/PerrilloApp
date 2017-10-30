@@ -16,7 +16,6 @@ const CurrentLocation = ({ currentPlace }) => {
 
 const styles = StyleSheet.create({
 	textPlace: {
-		flex: 1,
 		fontWeight: 'bold',
 		fontSize: 25,
 		marginTop: 5

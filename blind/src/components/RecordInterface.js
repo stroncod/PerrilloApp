@@ -93,12 +93,6 @@ export default class RecordInterface extends Component {
   render() {
     return (
       <View style={styles.container} accessible={true}>
-        <Text h2 style={styles.instructions}>
-          Presiona el boton grabar para ingresar la dirección a la que quieres ir. 
-          Cuando hayas terminado presiona el boton finalizar para ingresar correctamente la dirección.
-          Recuerda hablar despacio. Luego de escuchar la dirección ingresada, si es correcta apreta el 
-          boton Confirmar, si no es correcta apreta el botón Cancelar para repetir el proceso.
-        </Text>
         
       
         {this.state.results.map((result, index) => {
@@ -113,7 +107,7 @@ export default class RecordInterface extends Component {
             </Text>
           );
         })} 
-        
+        <View style={styles.buttonContainer}>
           <Button 
             onPress={this._startRecognizing.bind(this)}
             title="Grabar"
@@ -124,7 +118,8 @@ export default class RecordInterface extends Component {
               title="Finalizar"
               //style={styles.button}
           />
-        
+        </View>
+        <View style={styles.buttonContainer}>
         {this.state.itStopRecording ? 
           <Button
             onPress={this._destroyRecognizer.bind(this)}
@@ -136,7 +131,7 @@ export default class RecordInterface extends Component {
             title="Confirmar"
           /> 
         : null }
-
+        </View>
       </View>
     );
   }
@@ -144,8 +139,9 @@ export default class RecordInterface extends Component {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
   },
   container: {
     flex: 1,
