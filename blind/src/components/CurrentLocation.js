@@ -6,6 +6,9 @@ import {
 import Tts from 'react-native-tts';
 
 const CurrentLocation = ({ currentPlace }) => {
+	//Activo el text-to-speech a español
+	//y que diga el lugar por voz
+	// además lo muestro en pantalla, para lectura por talkback/voiceOver
   
   Tts.setDefaultLanguage('es-US');
   Tts.speak(`Usted esta en ${currentPlace}`);

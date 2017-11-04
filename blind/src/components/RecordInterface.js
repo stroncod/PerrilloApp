@@ -17,16 +17,20 @@ export default class RecordInterface extends Component {
       itStopRecording: false,
       started: '',
       results: [],
-    }; 
+    };
+    //Relaciona los eventos a las funciones del componente
     Voice.onSpeechEnd = this.onSpeechEnd.bind(this);
     Voice.onSpeechError = this.onSpeechError.bind(this);
     Voice.onSpeechResults = this.onSpeechResults.bind(this);
   }
-
+  //Limpia el buffer de descarga
+  //Arroja error al salir de la página
+  //ToDo: Fix this shit.
   //componentWillUnmount() {
     //Voice.destroy().then(Voice.removeAllListeners);
   //}
 
+  //Maneja el error con una alerta al usuario
   onSpeechError(e) {
     Alert.alert(
     'Problemas con el reconocimiento',
@@ -37,17 +41,19 @@ export default class RecordInterface extends Component {
     );
   }
 
+  //Entrega el arreglo de resultados al state
   onSpeechResults(e) {
     this.setState({
       results: e.value,
     });
   }
+  //Avisa que termino la grabación
   onSpeechEnd() {
     this.setState({
       itStopRecording: true
     });
   }
-
+  //Función de inicialización
   async _startRecognizing() {
     this.setState({
       started: '',
@@ -60,7 +66,7 @@ export default class RecordInterface extends Component {
       console.error(e);
     }
   }
-
+  //Función de detención
   async _stopRecognizing() {
     try {
       await Voice.stop();
@@ -68,7 +74,7 @@ export default class RecordInterface extends Component {
       console.error(e);
     }
   }
-
+  //Función de cancelacion
   async _cancelRecognizing() {
     try {
       await Voice.cancel();
@@ -76,7 +82,7 @@ export default class RecordInterface extends Component {
       console.error(e);
     }
   }
-
+  //Función de destrucción
   async _destroyRecognizer() {
     try {
       await Voice.destroy();
@@ -96,6 +102,7 @@ export default class RecordInterface extends Component {
         
       
         {this.state.results.map((result, index) => {
+            //Se muestran todos los resultados y se muestran via voz
           const accesibilityDialog = `La dirección ingresada es ${result}`;
           Tts.speak(accesibilityDialog);
           return (
@@ -121,6 +128,7 @@ export default class RecordInterface extends Component {
         </View>
         <View style={styles.buttonContainer}>
         {this.state.itStopRecording ? 
+          //Botones condicionales que aparecen una vez detenido la grabación
           <Button
             onPress={this._destroyRecognizer.bind(this)}
             title="Cancelar"

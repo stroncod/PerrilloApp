@@ -7,16 +7,20 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card } from 'react-native-elements';
-
+//Página de inicio de la app
+//cada modo está separado en card donde el texto se lee por separado
 const Home = () => {
+	//Cada boton llama en el evento onPress a la función correspondiente a su ruta
+	//del objeto Actions 
 	return (
 		<ScrollView>
 			<Card 
 				title='Modo Ruta'
-			>
+			>	
 				<Text style={{ marginBottom: 10 }}>				
 					Ingresa tu dirección para recibir tu ruta
 				</Text>
+
 				<Button
 					icon={{ name: 'code' }}
 					backgroundColor='#03A9F4'

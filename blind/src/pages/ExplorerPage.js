@@ -7,6 +7,7 @@ import {
 import RNGooglePlaces from 'react-native-google-places';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CurrentLocation from '../components/CurrentLocation';
+//Página de exploración
 
 class ExplorerPage extends Component {
   constructor(props) {
@@ -17,7 +18,8 @@ class ExplorerPage extends Component {
       error: null
     };
   }
-
+  //Al montar el componente obtiene el lugar de donde se encuentra el usuario
+  //Lo envia como prop a CurrentLocation
   componentDidMount() {
     RNGooglePlaces.getCurrentPlace()
     .then(response => this.setState({ currentPlaces: response }))

@@ -4,6 +4,9 @@ import RoutePage from './pages/RoutePage';
 import Home from './pages/Home';
 import ExplorerPage from './pages/ExplorerPage';
 
+//Router para cada ventana de la app. 
+//enlaza una página con un componente en src/pages/
+
 const RouterComponent = () => {
 	return (
 		<Router>

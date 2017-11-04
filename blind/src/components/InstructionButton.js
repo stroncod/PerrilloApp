@@ -7,13 +7,15 @@ import {
 } from 'react-native';
 import Sound from 'react-native-sound';
 
-
+//Creo un componente boton para las intrucciones
 const Button = ({onPress}) => (
   <TouchableOpacity onPress={onPress}>
     <Text style={styles.button}>Instrucciones</Text>
   </TouchableOpacity>
 );
 
+//guardo en la variable instructions la grabación para pre-carga del audio
+//ToDo: que el nombre sea dado por el props
 const instructions = new Sound('instructions_record.mp3', Sound.MAIN_BUNDLE, (error) => {
   		if (error) {
     		console.log('failed to load the sound', error);
@@ -27,11 +29,11 @@ export default class RecordInterface extends Component {
     super(props);
     Sound.setCategory('Playback');
    }   
-
+   //elimina todo audio al salirse de la ventana en el que esta el componente
 	componentWillUnmount() {
 		instructions.stop();
 	}
-
+  //función que reproduce el audio
 	onPlay() {
 		instructions.play((success) => {
   			if (success) {

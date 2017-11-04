@@ -4,9 +4,10 @@
 
 - Implementar Google Maps Routes
 - Implementar Transantiago API
-- Modificar reconocimiento por voz (mejorar captura de resultados)
+- Validar direcciones ingresadas por voz
 - Mejorar estilo
 - Implementar Redux (Probablemente?) 
+- Agregar funcionalidad a los botones del modo exploración
 
 
 
