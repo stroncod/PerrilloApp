@@ -7,6 +7,7 @@ import {
 import RNGooglePlaces from 'react-native-google-places';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CurrentLocation from '../components/CurrentLocation';
+import { Actions } from 'react-native-router-flux';
 //Página de exploración
 
 class ExplorerPage extends Component {
@@ -33,7 +34,11 @@ class ExplorerPage extends Component {
           )}
         <View style={styles.buttonContainer}>
         
-                <Icon.Button name="bus" backgroundColor="#3b5998">
+                <Icon.Button 
+                  name="bus" 
+                  backgroundColor="#3b5998"
+                  onPress={() => Actions.selectionExplorer()}
+                >
                   Transporte
                 </Icon.Button>
             

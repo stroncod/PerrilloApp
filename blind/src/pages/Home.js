@@ -27,7 +27,7 @@ const Home = () => {
 					fontFamily='Lato'
 					buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
 					title='Ingresar al modo ruta' 				
-					onPress={() => Actions.recordbutton()}			
+					onPress={() => Actions.routeMode()}			
 				/>
 			</Card>
 			<Card 
