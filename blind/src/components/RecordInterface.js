@@ -9,6 +9,7 @@ import {
 
 import Voice from 'react-native-voice';
 import Tts from 'react-native-tts';
+import gmapsDirections from './GetDirections';
 
 export default class RecordInterface extends Component {
   constructor(props) {
@@ -135,9 +136,7 @@ export default class RecordInterface extends Component {
           /> 
         : null }
         {this.state.itStopRecording ? 
-          <Button
-            title="Confirmar"
-          /> 
+          <gmapsDirections />
         : null }
         </View>
       </View>
