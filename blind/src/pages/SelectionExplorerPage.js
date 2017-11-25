@@ -22,7 +22,6 @@ class SelectionExplorerPage extends Component {
   }
 
   componentWillMount() {
-    
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({

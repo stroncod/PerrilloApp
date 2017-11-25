@@ -56,7 +56,8 @@ const Home = () => {
 					backgroundColor='#4286f4'
 					fontFamily='Lato'
 					buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-					title='Ingresa a configuración'			
+					title='Ingresa a configuración'	
+					onPress={() => Actions.boton()}		
 				/>
 			</Card>
 			

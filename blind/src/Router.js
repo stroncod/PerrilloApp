@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import ExplorerPage from './pages/ExplorerPage';
 import SelectionExplorerPage from './pages/SelectionExplorerPage';
 import SelectionDefaultPage from './pages/SelectionDefaultPage';
+import BusStopInformation from './components/BusStopInformation';
 
 
 //Router para cada ventana de la app. 
@@ -19,6 +20,7 @@ const RouterComponent = () => {
 				<Scene key="exploreMode" component={ExplorerPage} title="ExplorerPage" />
 				<Scene key="selectionExplorer" component={SelectionExplorerPage} title="Selection" />
 				<Scene key="selectionDefault" component={SelectionDefaultPage} title="Selection" />
+				<Scene key="boton" component={BusStopInformation} title="Test" />
 				
 			</Scene>
 		</Router>
