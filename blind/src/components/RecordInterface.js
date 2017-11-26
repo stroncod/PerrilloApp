@@ -9,6 +9,7 @@ import {
 
 import Voice from 'react-native-voice';
 import Tts from 'react-native-tts';
+import GmapsDirections from './GetDirections';
 
 export default class RecordInterface extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ export default class RecordInterface extends Component {
       itStopRecording: false,
       started: '',
       results: [],
+      isReady: false,
     };
     //Relaciona los eventos a las funciones del componente
     Voice.onSpeechEnd = this.onSpeechEnd.bind(this);
@@ -45,6 +47,7 @@ export default class RecordInterface extends Component {
   onSpeechResults(e) {
     this.setState({
       results: e.value,
+      isReady: true,
     });
   }
   //Avisa que termino la grabación
@@ -58,7 +61,8 @@ export default class RecordInterface extends Component {
     this.setState({
       started: '',
       results: [],
-      itStopRecording: false
+      itStopRecording: false,
+      isReady: false,
     });
     try {
       await Voice.start('es-US');
@@ -93,15 +97,17 @@ export default class RecordInterface extends Component {
       itStopRecording: false,
       started: '',
       results: [],
+      isReady: false,
     });
   }
 
   render() {
+    console.log(this.state.results[0]);
     return (
       <View style={styles.container} accessible={true}>
         
       
-        {this.state.results.map((result, index) => {
+        {this.state.results.slice(0, 1).map((result, index) => {
             //Se muestran todos los resultados y se muestran via voz
           const accesibilityDialog = `La dirección ingresada es ${result}`;
           Tts.speak(accesibilityDialog);
@@ -134,11 +140,10 @@ export default class RecordInterface extends Component {
             title="Cancelar"
           /> 
         : null }
-        {this.state.itStopRecording ? 
-          <Button
-            title="Confirmar"
-          /> 
-        : null }
+
+        {this.state.itStopRecording && this.state.isReady ? 
+          <GmapsDirections direction={this.state.results[0]} />  
+          : null} 
         </View>
       </View>
     );

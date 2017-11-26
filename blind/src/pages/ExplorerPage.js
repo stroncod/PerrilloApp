@@ -42,7 +42,11 @@ class ExplorerPage extends Component {
                   Transporte
                 </Icon.Button>
             
-                <Icon.Button name="bank" backgroundColor="#3b5998">
+                <Icon.Button 
+                  name="bank" 
+                  backgroundColor="#3b5998"
+                  onPress={() => Actions.selectionDefault('banco')}
+                >
                   Bancos
                 </Icon.Button>
             

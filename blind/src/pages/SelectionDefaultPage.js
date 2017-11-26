@@ -3,11 +3,10 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  ListView,
+  TouchableOpacity
 } from 'react-native';
-
+import RNGooglePlaces from 'react-native-google-places';
 import { List, ListItem } from 'react-native-elements';
-import axios from 'axios';
 
 class SelectionExplorerPage extends Component {
   constructor(props) {
@@ -20,8 +19,9 @@ class SelectionExplorerPage extends Component {
       error: null,
     };
   }
-  componentWillMount() {
-    navigator.geolocation.getCurrentPosition(
+
+  componentDidMount() {
+    /*navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
           latitude: position.coords.latitude,
@@ -31,14 +31,15 @@ class SelectionExplorerPage extends Component {
       },
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    );
-  }
-  componentDidMount() {
-    const lat = String(this.state.latitude);
-    const lon = String(this.state.longitude);
-    const url = 'http://www.transantiago.cl/restservice/rest/getpuntoparada?lat='+ lat +'&lon='+ lon;
-    axios.get(url)
-    .then(response => this.setState({ predictions: response.data }))
+    );*/
+    RNGooglePlaces.getAutocompletePredictions('Banco', {
+      types: 'geocode',
+      country: 'CL',
+      latitude: -33.54589434,
+      longitude: -70.58713939,
+      radius: 5,
+    })
+    .then((results) => this.setState({ predictions: results }))
     .catch((error) => console.log(error.message));
   }
 
@@ -49,8 +50,8 @@ class SelectionExplorerPage extends Component {
         <List containerStyle={{ marginBottom: 20 }}>
       {this.state.predictions.map(prediction => (
         <ListItem
-          key={prediction.cod}
-          title={prediction.name}
+          key={prediction.placeID}
+          title={prediction.fullText}
         />      
       ))
     }
