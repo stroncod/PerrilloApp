@@ -8,7 +8,7 @@ import {
 import Sound from 'react-native-sound';
 
 //Creo un componente boton para las intrucciones
-const Button = ({onPress}) => (
+const Button = ({ onPress }) => (
   <TouchableOpacity onPress={onPress}>
     <Text style={styles.button}>Instrucciones</Text>
   </TouchableOpacity>

@@ -16,29 +16,17 @@ export default class BusStopInformation extends Component {
 		super(props);
 		this.state = {
       busStopInfo: [],
-      latitude: -33.54589434,
-      longitude: -70.58713939,
+      latitude: null,
+      longitude: null,
       busStops: [],
       error: null, 
 		};
 	}
-	componentWillMount() {
-    navigator.geolocation.getCurrentPosition(
-    (position) => {
-      this.setState({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-        error: null,
-      });
-    },
-    (error) => this.setState({ error: error.message }),
-    { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    );
-	}
+	
   componentDidMount() {
-    const lat = String(this.state.latitude);
-    const lon = String(this.state.longitude);
-    const url = 'http://www.transantiago.cl/restservice/rest/getpuntoparada?lat='+ lat +'&lon='+ lon;
+    const lat = String(this.props.lat);
+    const lng = String(this.props.lng);
+    const url = 'http://www.transantiago.cl/restservice/rest/getpuntoparada?lat='+ lat +'&lon='+ lng;
     axios.get(url)
     .then(response => this.setState({ busStops: response.data }))
     .catch((error) => console.log(error.message));     
@@ -61,7 +49,10 @@ export default class BusStopInformation extends Component {
 
   render() {
     console.log(this.state);
-    this.gettingBusStopInfo();
+    if (this.props.lng != null && this.props.lat != null) {
+      this.gettingBusStopInfo();
+    }
+    
     return (
       <ScrollView >
         <List containerStyle={{ marginBottom: 20 }}>

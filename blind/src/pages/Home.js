@@ -57,7 +57,7 @@ const Home = () => {
 					fontFamily='Lato'
 					buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
 					title='Ingresa a configuración'	
-					onPress={() => Actions.boton()}		
+					onPress={() => Actions.busInfoStop()}		
 				/>
 			</Card>
 			
