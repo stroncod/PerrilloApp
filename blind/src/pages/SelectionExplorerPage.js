@@ -3,9 +3,9 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  TouchableOpacity
+  ListView,
 } from 'react-native';
-import RNGooglePlaces from 'react-native-google-places';
+
 import { List, ListItem } from 'react-native-elements';
 import axios from 'axios';
 

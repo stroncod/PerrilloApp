@@ -45,7 +45,7 @@ class ExplorerPage extends Component {
                 <Icon.Button 
                   name="bank" 
                   backgroundColor="#3b5998"
-                  onPress={() => Actions.selectionDefault()}
+                  onPress={() => Actions.selectionDefault('banco')}
                 >
                   Bancos
                 </Icon.Button>

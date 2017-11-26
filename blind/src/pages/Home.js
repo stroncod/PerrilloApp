@@ -46,17 +46,17 @@ const Home = () => {
 				/>
 			</Card>
 			<Card 
-				title='Configuración'
+				title='Información de Paraderos'
 			>
 				<Text style={{ marginBottom: 10 }}>				
-					Modifica configuraciones de la aplicación
+					Entrega información de los servicios de los paraderos
 				</Text>
 				<Button
 					icon={{ name: 'code' }}
 					backgroundColor='#4286f4'
 					fontFamily='Lato'
 					buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-					title='Ingresa a configuración'	
+					title='Ingresar a información de paradero'	
 					onPress={() => Actions.busInfoStop()}		
 				/>
 			</Card>
