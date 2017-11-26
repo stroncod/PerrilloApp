@@ -94,15 +94,17 @@ export default class RecordInterface extends Component {
       itStopRecording: false,
       started: '',
       results: [],
+      finalDirection: '',
     });
   }
 
   render() {
+    console.log(this.state.results[0]);
     return (
       <View style={styles.container} accessible={true}>
         
       
-        {this.state.results.map((result, index) => {
+        {this.state.results.slice(0, 1).map((result, index) => {
             //Se muestran todos los resultados y se muestran via voz
           const accesibilityDialog = `La dirección ingresada es ${result}`;
           Tts.speak(accesibilityDialog);
@@ -135,8 +137,8 @@ export default class RecordInterface extends Component {
             title="Cancelar"
           /> 
         : null }
-        {this.state.itStopRecording ? 
-          <GmapsDirections />
+        {this.state.itStopRecording && this.state.results[0] !== null ? 
+          <GmapsDirections direction="Antonio Varas 880" />
         : null }
         </View>
       </View>

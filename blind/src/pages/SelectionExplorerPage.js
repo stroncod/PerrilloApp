@@ -20,7 +20,6 @@ class SelectionExplorerPage extends Component {
       error: null,
     };
   }
-
   componentWillMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {

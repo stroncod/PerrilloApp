@@ -14,24 +14,26 @@ export default class gmapsDirections extends Component {
     super(props);
     this.state = {
       geocode: [],
+      isInit: false,
     };
   }
-  componentWillMount(props) {
-      Geocoder.geocodeAddress(props)
+  componentDidMount() {
+      console.log(this.props.direction);
+      Geocoder.geocodeAddress(this.props.direction)
       .then((results) => this.setState({ geocode: results }))
       .catch((error) => console.log(error.message));
-    }
-
-  handleGetDirections = (state) => {
+  }
+  handleGetDirections = () => {
+    console.log(this.state.geocode[0]);
     const data = {
       destination: {
-        latitude: Number(state.geocode[0].position.lat),
-        longitude: Number(state.geocode[0].position.lng),
+        latitude: this.state.geocode[0].position.lat,
+        longitude: this.state.geocode[0].position.lng,
       },
       params: [
         {
           key: 'dirflg',
-          value: 'w',
+          value: 'r',
         },
         {
           key: 'view',

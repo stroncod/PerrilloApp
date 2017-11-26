@@ -3,6 +3,7 @@ package com.blind;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import net.no_mad.tts.TextToSpeechPackage;
 import com.arttitude360.reactnative.rngoogleplaces.RNGooglePlacesPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNGeocoderPackage(),
             new RNSoundPackage(),
             new TextToSpeechPackage(),
             new RNGooglePlacesPackage(),
