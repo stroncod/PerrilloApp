@@ -11,7 +11,7 @@ class CurrentLocation extends Component {
 	// además lo muestro en pantalla, para lectura por talkback/voiceOver
 		constructor(props) {
       super(props);
-    	this.state = {
+      this.state = {
     }; 
 	}
 	componentDidMount() {
@@ -22,7 +22,7 @@ class CurrentLocation extends Component {
       Tts.setDefaultLanguage('es-US');
       Tts.speak(`Usted esta en ${this.props.currentPlace}`);
       return (   
-     	 <Text style={styles.textPlace}> { this.props.currentPlace } </Text>
+        <Text style={styles.textPlace}> { this.props.currentPlace } </Text>
       ); 
 	}
 	

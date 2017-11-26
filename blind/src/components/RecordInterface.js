@@ -18,6 +18,7 @@ export default class RecordInterface extends Component {
       itStopRecording: false,
       started: '',
       results: [],
+      isReady: false,
     };
     //Relaciona los eventos a las funciones del componente
     Voice.onSpeechEnd = this.onSpeechEnd.bind(this);
@@ -46,6 +47,7 @@ export default class RecordInterface extends Component {
   onSpeechResults(e) {
     this.setState({
       results: e.value,
+      isReady: true,
     });
   }
   //Avisa que termino la grabación
@@ -59,7 +61,8 @@ export default class RecordInterface extends Component {
     this.setState({
       started: '',
       results: [],
-      itStopRecording: false
+      itStopRecording: false,
+      isReady: false,
     });
     try {
       await Voice.start('es-US');
@@ -94,7 +97,7 @@ export default class RecordInterface extends Component {
       itStopRecording: false,
       started: '',
       results: [],
-      finalDirection: '',
+      isReady: false,
     });
   }
 
@@ -137,9 +140,10 @@ export default class RecordInterface extends Component {
             title="Cancelar"
           /> 
         : null }
-        {this.state.itStopRecording && this.state.results[0] !== null ? 
-          <GmapsDirections direction="Antonio Varas 880" />
-        : null }
+
+        {this.state.itStopRecording && this.state.isReady ? 
+          <GmapsDirections direction={this.state.results[0]} />  
+          : null} 
         </View>
       </View>
     );
