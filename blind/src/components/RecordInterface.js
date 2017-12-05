@@ -34,13 +34,14 @@ export default class RecordInterface extends Component {
 
   //Maneja el error con una alerta al usuario
   onSpeechError(e) {
-    Alert.alert(
+/*    Alert.alert(
     'Problemas con el reconocimiento',
     JSON.stringify(e.error),
   [
     { text: 'OK', onPress: () => console.log('OK Pressed') },
   ],
-    );
+    );*/
+    console.log(e.error);
   }
 
   //Entrega el arreglo de resultados al state

@@ -19,6 +19,7 @@ export default class gmapsDirections extends Component {
   }
   componentDidMount() {
       console.log(this.props.direction);
+      Geocoder.fallbackToGoogle('AIzaSyA1TKALlt_-i2QOYOcqY89v0TGzrYCxQtc');
       Geocoder.geocodeAddress(this.props.direction)
       .then((results) => this.setState({ geocode: results }))
       .catch((error) => console.log(error.message));
@@ -47,7 +48,7 @@ export default class gmapsDirections extends Component {
   render() {
     return (
       <View >
-        <Button onPress={this.handleGetDirections} title="Get Directions" />
+        <Button onPress={this.handleGetDirections} title="Aceptar" />
       </View>
     );
   }
