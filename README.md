@@ -1,5 +1,4 @@
-![Perrillo][logo]
-[logo]: https://rawgit.com/stroncod/PerrilloApp/master/perrillo.png
+![Perrillo](https://rawgit.com/stroncod/PerrilloApp/master/perrillo.png)
 # Perrillo App
 
 Sistema de guiado para personas ciegas en el transporte público en Santiago, Chile
