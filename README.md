@@ -1,10 +1,9 @@
-# is2-blindProyect
+![Perrillo][logo]
+[logo]: https://rawgit.com/stroncod/PerrilloApp/master/perrillo.png
+# Perrillo App
 
-## ToDo
-
-- Mejorar estilo
-- Implementar Redux (Probablemente?) 
-- Agregar funcionalidad a los botones del modo exploración
+Sistema de guiado para personas ciegas en el transporte público en Santiago, Chile
+Proyecto en el marco del curso Ingeniería en Software 2 de la Universidad Andres Bello
 
 
 
