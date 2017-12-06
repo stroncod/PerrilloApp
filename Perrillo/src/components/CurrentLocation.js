@@ -6,19 +6,13 @@ import {
 import Tts from 'react-native-tts';
 
 class CurrentLocation extends Component {
-	//Activo el text-to-speech a español
-	//y que diga el lugar por voz
-	// además lo muestro en pantalla, para lectura por talkback/voiceOver
-		constructor(props) {
+	constructor(props) {
       super(props);
       this.state = {
-    }; 
+		}; 
 	}
-	componentDidMount() {
-    setTimeout(() => this.forceUpdate(), 180000);
-  }
-
     render() {
+    //Showing current place text and activating text-to-speech
       Tts.setDefaultLanguage('es-US');
       Tts.speak(`Usted esta en ${this.props.currentPlace}`);
       return (   

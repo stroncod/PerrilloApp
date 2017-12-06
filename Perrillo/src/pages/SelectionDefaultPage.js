@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
-  Text,
   ScrollView,
-  TouchableOpacity
 } from 'react-native';
 import RNGooglePlaces from 'react-native-google-places';
 import { List, ListItem } from 'react-native-elements';
@@ -19,19 +16,12 @@ class SelectionExplorerPage extends Component {
       error: null,
     };
   }
-
   componentDidMount() {
-    /*navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          error: null,
-        });
-      },
-      (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    );*/
+    /*
+      Get nearby banks 
+      ToDo: Most do by props
+            Problem with async call
+     */
     RNGooglePlaces.getAutocompletePredictions('Banco', {
       types: 'geocode',
       country: 'CL',

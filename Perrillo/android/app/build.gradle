@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-background-task')
     compile project(':react-native-geocoder')
     compile project(':react-native-sound')
     compile project(':react-native-tts')

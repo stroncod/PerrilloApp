@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { 
-	Text,
-	StyleSheet,
 	View,
 	Button,
 } from 'react-native';
@@ -18,13 +16,16 @@ export default class gmapsDirections extends Component {
     };
   }
   componentDidMount() {
-      console.log(this.props.direction);
+      /*
+        Getting the geocoding address latituted and longitude after 
+        @param = prop given after the voice recording and confirmation
+       */ 
+      //Geocoder.fallbackToGoogle('YOUR_GOOGLE_KEY'); Add this if geocoding doesn't work
       Geocoder.geocodeAddress(this.props.direction)
       .then((results) => this.setState({ geocode: results }))
       .catch((error) => console.log(error.message));
   }
   handleGetDirections = () => {
-    console.log(this.state.geocode[0]);
     const data = {
       destination: {
         latitude: this.state.geocode[0].position.lat,
@@ -32,10 +33,15 @@ export default class gmapsDirections extends Component {
       },
       params: [
         {
+          //value can be: 
+          //w (walking), 
+          //c (car), 
+          //set to r for public transportation
           key: 'dirflg',
           value: 'r',
         },
         {
+          //Set the view on text and not map (in google maps app)
           key: 'view',
           value: 'text',
         }
@@ -47,7 +53,7 @@ export default class gmapsDirections extends Component {
   render() {
     return (
       <View >
-        <Button onPress={this.handleGetDirections} title="Get Directions" />
+        <Button onPress={this.handleGetDirections} title="Aceptar" />
       </View>
     );
   }

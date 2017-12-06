@@ -2,50 +2,52 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View,
   TouchableOpacity,
 } from 'react-native';
 import Sound from 'react-native-sound';
 
-//Creo un componente boton para las intrucciones
+//Component Button to activate 
 const Button = ({ onPress }) => (
   <TouchableOpacity onPress={onPress}>
     <Text style={styles.button}>Instrucciones</Text>
   </TouchableOpacity>
 );
 
-//guardo en la variable instructions la grabación para pre-carga del audio
-//ToDo: que el nombre sea dado por el props
+//In this variable, the audio is pre-recorded
+//ToDo: name of audio given by props
 const instructions = new Sound('instructions_record.mp3', Sound.MAIN_BUNDLE, (error) => {
-  		if (error) {
-    		console.log('failed to load the sound', error);
-    		return;
-    				}	
+      if (error) {
+        console.log('failed to load the sound', error);
+        return;
+      }	
 	});
 
-
-export default class RecordInterface extends Component {
+export default class RecordInterface extends Component  {
 	constructor(props) {
     super(props);
     Sound.setCategory('Playback');
    }   
-   //elimina todo audio al salirse de la ventana en el que esta el componente
+   //Stoping when unmount
+   //ToDo: stoping by press
 	componentWillUnmount() {
 		instructions.stop();
 	}
-  //función que reproduce el audio
+  /*
+    Function to record
+    success fallback managing response if error or else
+   */
 	onPlay() {
 		instructions.play((success) => {
-  			if (success) {
-    		console.log('successfully finished playing');
-  			} else {
-    			console.log('playback failed due to audio decoding errors');
-    			// reset the player to its uninitialized state (android only)
-    			// this is the only option to recover after an error occured and use the player again
-    			instructions.reset();
-  			}
-		});
-	} 
+        if (success) {
+          console.log('successfully finished playing');
+        } else {
+          console.log('playback failed due to audio decoding errors');
+          // reset the player to its uninitialized state (android only)
+          // this is the only option to recover after an error occured and use the player again
+          instructions.reset();
+        } 
+    });
+  } 
 	render() {
 		return (
 			<Button onPress={() => this.onPlay()} />

@@ -9,6 +9,11 @@ import {
 import { List, ListItem } from 'react-native-elements';
 import axios from 'axios';
 
+/*
+  Same as SelectionDefaultPage
+  but listing with transantiago API
+ */
+
 class SelectionExplorerPage extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +25,9 @@ class SelectionExplorerPage extends Component {
       error: null,
     };
   }
+  //Async call for geo call won't always work 
+  //sometimes the axios call is made first 
+  //that's why there are set values on state
   componentWillMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -33,6 +41,7 @@ class SelectionExplorerPage extends Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
     );
   }
+  //Return an array of nearby bus stops by geo coords
   componentDidMount() {
     const lat = String(this.state.latitude);
     const lon = String(this.state.longitude);

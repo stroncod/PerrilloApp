@@ -1,17 +1,19 @@
 import React from 'react';
 import {
-  StyleSheet,
   Button,
   Text,
   ScrollView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card } from 'react-native-elements';
-//Página de inicio de la app
-//cada modo está separado en card donde el texto se lee por separado
+
 const Home = () => {
-	//Cada boton llama en el evento onPress a la función correspondiente a su ruta
-	//del objeto Actions 
+	/*
+		Home Page
+		-> Route Mode : by voice, give an adress and get routes from Gmaps
+		-> Explore Mode : gives current location by voice 
+		-> Bus Stop Info : gives arriving time of buses on nearby stop
+	 */ 
 	return (
 		<ScrollView>
 			<Card 
@@ -59,8 +61,7 @@ const Home = () => {
 					title='Ingresar a información de paradero'	
 					onPress={() => Actions.busInfoStop()}		
 				/>
-			</Card>
-			
+			</Card>		
 		</ScrollView>
 	);
 };

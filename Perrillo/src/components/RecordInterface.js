@@ -4,9 +4,7 @@ import {
   Text,
   View,
   Button,
-  Alert,
 } from 'react-native';
-
 import Voice from 'react-native-voice';
 import Tts from 'react-native-tts';
 import GmapsDirections from './GetDirections';
@@ -20,43 +18,40 @@ export default class RecordInterface extends Component {
       results: [],
       isReady: false,
     };
-    //Relaciona los eventos a las funciones del componente
+    //Biding of events
     Voice.onSpeechEnd = this.onSpeechEnd.bind(this);
     Voice.onSpeechError = this.onSpeechError.bind(this);
     Voice.onSpeechResults = this.onSpeechResults.bind(this);
   }
-  //Limpia el buffer de descarga
-  //Arroja error al salir de la página
-  //ToDo: Fix this shit.
+  //Removing listeners after unmount
+  //Gives error, see: https://github.com/wenkesj/react-native-voice/issues/42 
+  //ToDo: Fix this sh*t.
   //componentWillUnmount() {
     //Voice.destroy().then(Voice.removeAllListeners);
   //}
 
-  //Maneja el error con una alerta al usuario
+  /*
+    Usually to errors
+    7: No match (records anyway)
+    5: server error (null recording)
+   */
   onSpeechError(e) {
-    Alert.alert(
-    'Problemas con el reconocimiento',
-    JSON.stringify(e.error),
-  [
-    { text: 'OK', onPress: () => console.log('OK Pressed') },
-  ],
-    );
+    console.log(e.error);
   }
 
-  //Entrega el arreglo de resultados al state
+  //gives you the results after startRecognizing
   onSpeechResults(e) {
     this.setState({
       results: e.value,
       isReady: true,
     });
   }
-  //Avisa que termino la grabación
+  //seting after stopRecognizing or timeout 
   onSpeechEnd() {
     this.setState({
       itStopRecording: true
     });
   }
-  //Función de inicialización
   async _startRecognizing() {
     this.setState({
       started: '',
@@ -65,12 +60,11 @@ export default class RecordInterface extends Component {
       isReady: false,
     });
     try {
-      await Voice.start('es-US');
+      await Voice.start('es-US'); //set 'en-US' for english
     } catch (e) {
       console.error(e);
     }
   }
-  //Función de detención
   async _stopRecognizing() {
     try {
       await Voice.stop();
@@ -78,7 +72,6 @@ export default class RecordInterface extends Component {
       console.error(e);
     }
   }
-  //Función de cancelacion
   async _cancelRecognizing() {
     try {
       await Voice.cancel();
@@ -102,13 +95,10 @@ export default class RecordInterface extends Component {
   }
 
   render() {
-    console.log(this.state.results[0]);
     return (
-      <View style={styles.container} accessible={true}>
-        
-      
+      <View style={styles.container} accessible={true}>   
         {this.state.results.slice(0, 1).map((result, index) => {
-            //Se muestran todos los resultados y se muestran via voz
+            //Show result via tts (no partial result and just the first one)
           const accesibilityDialog = `La dirección ingresada es ${result}`;
           Tts.speak(accesibilityDialog);
           return (
@@ -133,8 +123,9 @@ export default class RecordInterface extends Component {
           />
         </View>
         <View style={styles.buttonContainer}>
+        
         {this.state.itStopRecording ? 
-          //Botones condicionales que aparecen una vez detenido la grabación
+          //Shows only after recording is ready
           <Button
             onPress={this._destroyRecognizer.bind(this)}
             title="Cancelar"
@@ -142,6 +133,7 @@ export default class RecordInterface extends Component {
         : null }
 
         {this.state.itStopRecording && this.state.isReady ? 
+          //Shows only after recording is ready
           <GmapsDirections direction={this.state.results[0]} />  
           : null} 
         </View>
