@@ -19,7 +19,7 @@ export default class gmapsDirections extends Component {
   }
   componentDidMount() {
       console.log(this.props.direction);
-      Geocoder.fallbackToGoogle('AIzaSyA1TKALlt_-i2QOYOcqY89v0TGzrYCxQtc');
+      //Geocoder.fallbackToGoogle('YOUR_GOOGLE_KEY'); Add this if geocoding doesn't work
       Geocoder.geocodeAddress(this.props.direction)
       .then((results) => this.setState({ geocode: results }))
       .catch((error) => console.log(error.message));

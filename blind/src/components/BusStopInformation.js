@@ -37,7 +37,7 @@ export default class BusStopInformation extends Component {
                   busStop.cod + '&codser='
                   )
       .then(response => this.setState({ busStopInfo: response.data.servicios.item }))
-      .catch((error) => console.log(error.message))    
+      .catch((error) => this.setState({ error: error }))    
       ));    
   }
   arriveInfoToSpeech(stopInfo) {
@@ -52,7 +52,6 @@ export default class BusStopInformation extends Component {
     if (this.props.lng != null && this.props.lat != null) {
       this.gettingBusStopInfo();
     }
-    
     return (
       <ScrollView >
         <List containerStyle={{ marginBottom: 20 }}>
