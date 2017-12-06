@@ -3,7 +3,7 @@ package com.blind;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.transistorsoft.rnbackgroundgeolocation.RNBackgroundGeolocation;
+import com.jamesisaac.rnbackgroundtask.BackgroundTaskPackage;
 import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import net.no_mad.tts.TextToSpeechPackage;
@@ -31,7 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNBackgroundGeolocation(),
+            new BackgroundTaskPackage(),
             new RNGeocoderPackage(),
             new RNSoundPackage(),
             new TextToSpeechPackage(),
@@ -57,5 +57,6 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+    BackgroundTaskPackage.useContext(this);
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
+  Button,
   View
 } from 'react-native';
 import RNGooglePlaces from 'react-native-google-places';
@@ -9,24 +9,33 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import CurrentLocation from '../components/CurrentLocation';
 import { Actions } from 'react-native-router-flux';
 //Página de exploración
-
+//
+//
 class ExplorerPage extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       currentPlaces: [],
-      error: null
+      error: null,
     };
+    this.timer = setInterval(() => { this.getLocation(); }, 12000);
   }
+  componentDidMount() {
+    this.getLocation();
+  }
+
   //Al montar el componente obtiene el lugar de donde se encuentra el usuario
   //Lo envia como prop a CurrentLocation
-  componentDidMount() {
+  getLocation() {
     RNGooglePlaces.getCurrentPlace()
     .then(response => this.setState({ currentPlaces: response }))
     .catch((error) => this.setState({ error: error.messsage }));
   }
+  stopLocation() {
+    clearInterval(this.timer);
+  }
   render() {
+    //this.getLocation();
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         {this.state.currentPlaces.slice(0, 1).map(place =>
@@ -45,7 +54,7 @@ class ExplorerPage extends Component {
                 <Icon.Button 
                   name="bank" 
                   backgroundColor="#3b5998"
-                  onPress={() => Actions.selectionDefault('banco')}
+                  onPress={() => Actions.selectionDefault()}
                 >
                   Bancos
                 </Icon.Button>
@@ -58,6 +67,12 @@ class ExplorerPage extends Component {
                   Puntos Bip!
                 </Icon.Button>
          </View>
+         <View> 
+          <Button
+            onPress={() => this.stopLocation()}
+            title='Detener'
+          />
+        </View>
       </View>
     );
   }
