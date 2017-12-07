@@ -1,4 +1,4 @@
-<p align="center"><img width=60% src="https://raw.githubusercontent.com/stroncod/PerrilloApp/master/logo.png"></p>
+<p align="center"><img width=32.5% src="https://raw.githubusercontent.com/stroncod/PerrilloApp/master/logo.png"></p>
 
 # PerrilloApp
 
